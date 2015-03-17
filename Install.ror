@@ -1,0 +1,48 @@
+sudo apt-get update
+
+sudo apt-get install curl git-core patch build-essential bison zlib1g-dev libssl-dev libxml2-dev libxml2-dev sqlite3 libsqlite3-dev libxslt1-dev libyaml-0-2 autoconf automake libreadline6-dev libyaml-dev libtool nodejs postgresql phppgadmin php5 apache2 openssh-server imagemagick imagemagick-common libmagic1 libmagick++-dev  apache2-threaded-dev libapache2-mod-passenger gawk libgdbm-dev libncurses5-dev libffi-dev apt-transport-https ca-certificates synaptic libcurl4-gnutls-dev
+
+curl -L https://get.rvm.io | bash -s stable
+
+source ~/.rvm/scripts/rvm
+
+rvm -v
+
+rvm list known
+
+rvm install 2.1.2
+
+ruby -v
+rvm docs generate
+
+gem update
+gem install rails --version '~> 4.1.4'
+rails -v
+
+
+passanger
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+sudo apt-get install apt-transport-https ca-certificates
+
+sudo nano /etc/apt/sources.list.d/passenger.list
+En ajoutant cette ligne:
+deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
+
+sudo chown root:root /etc/apt/sources.list.d/passenger.list
+sudo chmod 644 /etc/apt/sources.list.d/passenger.list
+sudo apt-get update
+sudo apt-get install libapache2-mod-passenger
+
+sudo apt-get install libapache2-mod-passenger
+ou
+gem install passenger
+
+sudo a2enmod passenger
+sudo a2enmod rewrite
+sudo a2ensite www.malinuse.com
+
+sudo service apache2 restart
+
+passenger-install-apache2-module
+
+which ruby
