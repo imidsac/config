@@ -26,7 +26,17 @@ sudo apt-get install apt-transport-https ca-certificates
 
 sudo nano /etc/apt/sources.list.d/passenger.list
 En ajoutant cette ligne:
+##### !!!! Only add ONE of these lines, not all of them !!!! #####
+# Ubuntu 14.04
+deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
+# Ubuntu 12.04
 deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
+# Ubuntu 10.04
+deb https://oss-binaries.phusionpassenger.com/apt/passenger lucid main
+# Debian 7
+deb https://oss-binaries.phusionpassenger.com/apt/passenger wheezy main
+# Debian 6
+deb https://oss-binaries.phusionpassenger.com/apt/passenger squeeze main
 
 sudo chown root:root /etc/apt/sources.list.d/passenger.list
 sudo chmod 644 /etc/apt/sources.list.d/passenger.list
