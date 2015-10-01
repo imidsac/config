@@ -2,7 +2,8 @@ sudo apt-get update
 
 sudo apt-get install curl git-core patch build-essential bison zlib1g-dev libssl-dev libxml2-dev libxml2-dev libxslt1-dev libyaml-0-2 autoconf automake libreadline6-dev libyaml-dev libtool nodejs postgresql apache2 openssh-server imagemagick imagemagick-common libmagic1 libmagick++-dev  apache2-threaded-dev libapache2-mod-passenger gawk libgdbm-dev libncurses5-dev libffi-dev apt-transport-https ca-certificates synaptic libcurl4-gnutls-dev
 
-curl -L https://get.rvm.io | bash -s stable
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+\curl -sSL https://get.rvm.io | bash -s stable --rails
 
 source ~/.rvm/scripts/rvm
 
