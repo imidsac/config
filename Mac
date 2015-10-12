@@ -3,3 +3,17 @@ sudo apachectl restart
 sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 
 /usr/local/apache2/bin/httpd -S
+
+<VirtualHost *:80>
+ ServerName www.store.com
+ DocumentRoot /Library/WebServer/Documents/store/public
+ #ErrorLog /Library/WebServer/Documents/store/log/production.log
+ #CustomLog /Library/WebServer/Documents/store/log/production.log combined
+  RailsEnv production
+  # Other directives here
+  <Directory &quot;/Library/WebServer/Documents/store/public&quot; >
+     Options FollowSymLinks Indexes MultiViews
+     AllowOverride none
+     Require all granted
+   </Directory>
+</VirtualHost>
