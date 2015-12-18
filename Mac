@@ -4,6 +4,8 @@ sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 
 /usr/local/apache2/bin/httpd -S
 
+pg_ctl -D /usr/local/var/postgres status
+
 <VirtualHost *:80>
  ServerName www.store.com
  DocumentRoot /Library/WebServer/Documents/store/public
