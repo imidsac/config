@@ -1,52 +1,62 @@
 sudo apt-get update
+sudo apt-get upgrade -y
 
-sudo apt-get install curl git-core patch build-essential bison zlib1g-dev libssl-dev libxml2-dev libxml2-dev libxslt1-dev libyaml-0-2 autoconf automake libreadline6-dev libyaml-dev libtool nodejs postgresql apache2 openssh-server imagemagick imagemagick-common libmagic1 libmagick++-dev  apache2-threaded-dev libapache2-mod-passenger gawk libgdbm-dev libncurses5-dev libffi-dev apt-transport-https ca-certificates synaptic libcurl4-gnutls-dev
+# Packages for dev
+sudo apt-get install curl git-core patch build-essential bison zlib1g-dev libssl-dev libxml2-dev libxml2-dev libxslt1-dev libyaml-0-2 autoconf automake libreadline6-dev libyaml-dev libtool nodejs postgresql libpq-dev openssh-server imagemagick imagemagick-common libmagic1 libmagick++-dev  gawk libgdbm-dev libncurses5-dev libffi-dev apt-transport-https ca-certificates synaptic libcurl4-gnutls-dev
 
+# RVM & RUBY
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable --rails
-
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 
 rvm -v
-
 rvm list known
-
-rvm install 2.1.2
-
+rvm install 2.3.0
 ruby -v
 rvm docs generate
 
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+
 gem update
-gem install rails --version '~> 4.1.4'
+gem install bundler
+gem install passenger
+gem install rails --version '~> 5.0.1'
 rails -v
 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
+sudo apt-get install -y apt-transport-https ca-certificates
 
-passanger
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
-sudo apt-get install apt-transport-https ca-certificates
+###################
+##               ##
+## For Nginx     ##
+##               ##
+###################
+# Pour ubuntu 14.04
+https://www.phusionpassenger.com/library/install/nginx/install/oss/trusty/
+# Pour ubuntu 16.04
+https://www.phusionpassenger.com/library/install/nginx/install/oss/xenial/
+# Pour Debian 8 Jessie
+https://www.phusionpassenger.com/library/install/nginx/install/oss/jessie/
 
-sudo nano /etc/apt/sources.list.d/passenger.list
-En ajoutant cette ligne:
-##### !!!! Only add ONE of these lines, not all of them !!!! #####
-# Ubuntu 14.04
-deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
-# Ubuntu 12.04
-deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
-# Ubuntu 10.04
-deb https://oss-binaries.phusionpassenger.com/apt/passenger lucid main
-# Debian 7
-deb https://oss-binaries.phusionpassenger.com/apt/passenger wheezy main
-# Debian 6
-deb https://oss-binaries.phusionpassenger.com/apt/passenger squeeze main
+sudo service nginx restart
 
-sudo chown root:root /etc/apt/sources.list.d/passenger.list
-sudo chmod 644 /etc/apt/sources.list.d/passenger.list
+###################
+##               ##
+## For Apache2   ##
+##               ##
+###################
+# Add our APT repository
+# Pour ubuntu 16.04
+sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list'
+# Pour ubuntu 14.04
+sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main > /etc/apt/sources.list.d/passenger.list'
+# Pour Debian 8 Jessie
+sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger jessie main > /etc/apt/sources.list.d/passenger.list'
+
 sudo apt-get update
-sudo apt-get install libapache2-mod-passenger
 
-sudo apt-get install libapache2-mod-passenger
-ou
-gem install passenger
+# Install Passenger + Apache module
+sudo apt-get install -y apache2 apache2-threaded-dev libapache2-mod-passenger
 
 sudo a2enmod passenger
 sudo a2enmod rewrite
@@ -54,6 +64,4 @@ sudo a2ensite www.malinuse.com
 
 sudo service apache2 restart
 
-passenger-install-apache2-module
-
-which ruby
+ssh-keygen -t rsa
